@@ -1,0 +1,10 @@
+---
+- hosts: test01
+  remote_user: root
+  tasks:
+    - name: ssh-key-copy
+      authorized_key:
+        user: root
+        key: "{{ lookup('file','/root/.ssh/id_rsa.pub') }}"
+        state: present
+        exclusive: yes  #### 默认为no，这会移除其他key信息
